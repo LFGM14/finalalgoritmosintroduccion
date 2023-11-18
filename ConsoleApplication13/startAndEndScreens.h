@@ -1,6 +1,5 @@
 #pragma once
 
-
 #include "pch.h"
 #include <iostream>
 #include <Windows.h>
@@ -8,16 +7,55 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
-#include "utilidades.h"
-#include "mapsAndRunners.h"
-#include "ConsoleApplication13.cpp"
-
+#define rightMov 77
+#define leftMov 75
+#define upMov 72
+#define downMov 80
+#define jumpMov 32
 
 using namespace std;
 using namespace System;
 
+int upcLogo[FILAS][COLUMNAS] = { 
+{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,1,1,1,1,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,1,1,1,1,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,1,1,1,1,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,0,0,0,0,0,1,0,0,0,0,0,0,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,0,0,0,1,1,0,0,0,0,0,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0} };
 
-int start[FILAS][COLUMNAS] = { {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+void drawLogo(int upcLogo[FILAS][COLUMNAS]) {
+	for (int i=0; i < FILAS; i++) {
+		for (int j = 0; j < COLUMNAS; j++) {
+			setxy(j, i);
+			if (upcLogo[i][j] == 0) changeColor(0); 
+			if (upcLogo[i][j] == 1) changeColor(8);
+			cout << (char)219;
+		}
+	}
+}
+
+int start[FILAS][COLUMNAS] = { 
+    {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
 {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
 {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,0,0,0,0,0,2,2,2,2,0,0,0,0,0,3,3,3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
 {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,1,0,0,0,2,0,0,0,0,2,0,0,0,3,0,0,0,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
@@ -43,7 +81,7 @@ int start[FILAS][COLUMNAS] = { {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
 {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0} };
 
-void drawStart(int start[FILAS][COLUMNAS]) {
+void drawInaguration(int start[FILAS][COLUMNAS]) {
     for (int i = 0; i < FILAS; i++)
     {
         for (int j = 0; j < COLUMNAS; j++)
@@ -61,59 +99,84 @@ void drawStart(int start[FILAS][COLUMNAS]) {
     }
 
 }
-//void instructions(char& input, int& pag){
-//	int pos = 3;
-//
-//	while (1)
-//	{
-//
-//		if (_kbhit()) {
-//			input = _getch();
-//			if (input == leftMov) {
-//				pos = 3;
-//				Console::ForegroundColor = ConsoleColor::Blue;
-//				Console::SetCursorPosition(5, 38); cout << "volver";
-//				Console::SetCursorPosition(29, 38); cout << "     ";
-//				Console::SetCursorPosition(3, 32); printf("    *");
-//				Console::SetCursorPosition(3, 33); printf("  * * * *");
-//				Console::SetCursorPosition(3, 34); printf("* * * * *");
-//				Console::SetCursorPosition(3, 35); printf("  * * * *");
-//				Console::SetCursorPosition(3, 36); printf("    *");
-//				Console::ForegroundColor = ConsoleColor::White;
-//				Console::SetCursorPosition(27, 32); printf("    *");
-//				Console::SetCursorPosition(27, 33); printf("* * * *  ");
-//				Console::SetCursorPosition(27, 34); printf("* * * * *");
-//				Console::SetCursorPosition(27, 35); printf("* * * *  ");
-//				Console::SetCursorPosition(27, 36); printf("    *");
-//			}
-//			else if (input == rightMov) {
-//				pos = 27;
-//				Console::ForegroundColor = ConsoleColor::White;
-//				Console::SetCursorPosition(3, 32); printf("    *");
-//				Console::SetCursorPosition(3, 33); printf("  * * * *");
-//				Console::SetCursorPosition(3, 34); printf("* * * * *");
-//				Console::SetCursorPosition(3, 35); printf("  * * * *");
-//				Console::SetCursorPosition(3, 36); printf("    *");
-//				Console::ForegroundColor = ConsoleColor::Blue;
-//				Console::SetCursorPosition(27, 32); printf("    *");
-//				Console::SetCursorPosition(27, 33); printf("* * * *  ");
-//				Console::SetCursorPosition(27, 34); printf("* * * * *");
-//				Console::SetCursorPosition(27, 35); printf("* * * *  ");
-//				Console::SetCursorPosition(27, 36); printf("    *");
-//				Console::SetCursorPosition(5, 38); cout << "      ";
-//				Console::SetCursorPosition(29, 38); cout << "jugar";
-//			}
-//			else if (pos == 27 && input == 13) {
-//				pag = 1;
-//				Console::Clear();
-//				break;
-//			}
-//			else if (pos == 3 && input == 13) {
-//				input = 0;
-//				Console::Clear();
-//				break;
-//			}
-//		}
-//	}
-//
-//}
+
+void instructions(char input, int pag){
+	int pos = 3;
+	cout << "¡Inicio Explosivo!" << endl;
+
+	cout << "Cuando veas la luz verde, ¡es hora de comenzar!Tu atleta, Wayra, se moverá automáticamente en la fase de Carrera.No te preocupes, ¡disfruta del viento en tu cabello!" << endl;
+	cout << "¡Vallas y Saltos!" << endl;
+
+	cout << "En las fases de Vallas y Obstáculos, el control es tuyo.Usa las teclas para dirigir a Wayra y superar los desafíos.¡Esquiva las vallas y salta los obstáculos con estilo! " << endl;
+	cout << "¡Puntuación de Oro!" << endl;
+
+	cout << "Cada fase registra tu rendimiento.Al final, verás tu posición y tiempo.¡Apunta a la cima y consigue esa medalla de oro!" << endl;
+	cout << "¡Transición Suave!" << endl;
+
+	cout << "Automáticamente pasarás de una fase a otra.¡No te pierdas!La diversión nunca se detiene en Pista de Campeones." << endl;
+	cout << "¡Desafíos Progresivos!" << endl;
+
+	cout << "A medida que avanzas, la dificultad aumenta.¿Estás listo para superar nuevos retos ? ¡Demuestra que eres un verdadero campeón!" << endl;
+	cout << "¡Reinicio a la Acción!" << endl;
+
+	cout << "Si necesitas otra oportunidad, ¡adelante!Reinicia la primera fase y conquista el desafío.¡El camino hacia la gloria es tuyo para tomar!" << endl;
+	cout << "¡Control Extra!" <<endl;
+
+	cout << "En las fases de Vallas y Obstáculos, toma el control manual de Wayra con las teclas.¡Haz que salte y esquive a tu manera hacia el éxito!" << endl;
+	cout << "¡Diviértete y Gana!" << endl;
+
+	cout << "Recuerda, lo más importante es disfrutar.¡Demuestra tus habilidades atléticas y conviértete en el campeón en Pista de Campeones : Santiago 2023!" << endl;
+
+	while (1)
+	{
+
+		if (_kbhit()) {
+			input = _getch();
+			if (input == leftMov) {
+				pos = 3;
+				Console::ForegroundColor = ConsoleColor::Blue;
+				Console::SetCursorPosition(5, 38); cout << "volver";
+				Console::SetCursorPosition(29, 38); cout << "     ";
+				Console::SetCursorPosition(3, 32); printf("    *");
+				Console::SetCursorPosition(3, 33); printf("  * * * *");
+				Console::SetCursorPosition(3, 34); printf("* * * * *");
+				Console::SetCursorPosition(3, 35); printf("  * * * *");
+				Console::SetCursorPosition(3, 36); printf("    *");
+				Console::ForegroundColor = ConsoleColor::White;
+				Console::SetCursorPosition(27, 32); printf("    *");
+				Console::SetCursorPosition(27, 33); printf("* * * *  ");
+				Console::SetCursorPosition(27, 34); printf("* * * * *");
+				Console::SetCursorPosition(27, 35); printf("* * * *  ");
+				Console::SetCursorPosition(27, 36); printf("    *");
+			}
+			else if (input == rightMov) {
+				pos = 27;
+				Console::ForegroundColor = ConsoleColor::White;
+				Console::SetCursorPosition(3, 32); printf("    *");
+				Console::SetCursorPosition(3, 33); printf("  * * * *");
+				Console::SetCursorPosition(3, 34); printf("* * * * *");
+				Console::SetCursorPosition(3, 35); printf("  * * * *");
+				Console::SetCursorPosition(3, 36); printf("    *");
+				Console::ForegroundColor = ConsoleColor::Blue;
+				Console::SetCursorPosition(27, 32); printf("    *");
+				Console::SetCursorPosition(27, 33); printf("* * * *  ");
+				Console::SetCursorPosition(27, 34); printf("* * * * *");
+				Console::SetCursorPosition(27, 35); printf("* * * *  ");
+				Console::SetCursorPosition(27, 36); printf("    *");
+				Console::SetCursorPosition(5, 38); cout << "      ";
+				Console::SetCursorPosition(29, 38); cout << "jugar";
+			}
+			else if (pos == 27 && input == 13) {
+				pag = 1;
+				Console::Clear();
+				break;
+			}
+			else if (pos == 3 && input == 13) {
+				input = 0;
+				Console::Clear();
+				break;
+			}
+		}
+	}
+
+}

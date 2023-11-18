@@ -1,9 +1,10 @@
 #pragma once
 
 #include <iostream>
-#include <conio.h>
 #include <Windows.h>
-#include "ConsoleApplication13.cpp"
+#include <conio.h>
+#include <stdlib.h>
+#include <string.h>
 #define FILAS 25
 #define COLUMNAS 80
 
@@ -118,3 +119,4 @@ void changeColor(int x) {
 
     }
 }
+
