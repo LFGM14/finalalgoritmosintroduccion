@@ -39,7 +39,13 @@ int main() {
 	//flag_CO(flagH);
 	//flag_NI(flagH);
 	//flag_PA(flagH);
-	flag_SU(flagH);
+	/*flag_SU(flagH);*/
+
+	map1Race();
+	for (int i = 0; i < 4; i++) {
+		cout << "el numero" << i << "es " << map1Runners[i];
+	}
+
 	
 	system("pause>0");
 	return 0;

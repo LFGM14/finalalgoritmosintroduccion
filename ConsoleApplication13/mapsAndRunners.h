@@ -18,12 +18,18 @@ typedef struct {
 }
 runnerAutoMap1;
 
+runnerAutoMap1 r[4];
+
+
 typedef struct {
     string countryName;
-    void bandera;
+    void (*bandera)(int[2][3]);
 
-};
-runnerAutoMap1 r[4];
+} country;
+country countryArray[8];
+
+
+
 void runnerMov(int xPos[], int yPos[], int dX[], int dY[]) {
     for (int i = 0; i < 4; i++) {
         r[i].x = xPos[i];
@@ -249,24 +255,19 @@ void drawMap(int map[FILAS][COLUMNAS])
     }
 }
 
-void(*flagArray[8]) = { flag_MX, flag_BR ,flag_AR,flag_BO, flag_CO,flag_NI,flag_PA,flag_SU }; //HEMOS CREADO UN ARRAY DE FUNCIONES
+countryArray[8].bandera = {flag_MX, flag_BR ,flag_AR,flag_BO, flag_CO,flag_NI,flag_PA,flag_SU}; //HEMOS CREADO UN ARRAY DE FUNCIONES
                                                                                               //ES VOID PORQUE TIENE QUE SER
                                                                                               //IGUAL A LAS FUNCIONES QUE CONTIENE
-void(*map1Runners[4]);
+void (*map1Runners[4])();
 
+void map1Race() {
+    int chosenRunner;
+    
 
-int chosenRunner;
-
-
-void map1Race(flagArray[8]) {
     for (int i = 0; i < 4; i++) {
         chosenRunner = rand() % 8;
-        map1Runners[i] = flagArray[chosenRunner]
-        for (int j = 0; j < 8; j++) {
-            if (map1Runners[i] == flagArray[i]) {
-                chosenRunner = rand() % 8
-                map1Runners[i] = flagArray[chosenRunner];
-            }
+        map1Runners[i] == flagArray[chosenRunner];
         }
     }
-}
+
+
