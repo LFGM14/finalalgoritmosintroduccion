@@ -23,11 +23,10 @@ runnerAutoMap1 r[4];
 
 typedef struct {
     string countryName;
-    void (*bandera)(int[2][3]);
+    void Bandera;
 
 } country;
 country countryArray[8];
-
 
 
 void runnerMov(int xPos[], int yPos[], int dX[], int dY[]) {
