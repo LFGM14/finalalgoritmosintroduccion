@@ -14,6 +14,9 @@
 using namespace std;
 using namespace System;
 
+int milisegundos = 0;
+int segundos = 0;
+
 void gameStart() {
 	int yPosRunnersMap1[4] = { 8, 12, 16, 20 };
 	int xPosRunners = 0;
@@ -29,22 +32,28 @@ void gameStart() {
 int main() {
 	Console::SetWindowSize(80, 25);
 	srand(time(NULL));
+    char tecla;
+    int x= 20; int y= 1;
+    int cant_pasos = 0;
+    int hist_x[800];
+    int hist_y[800];
+    while (1) {
+        system("cls");
+        if (_kbhit()) {
+            tecla = _getch();
 
-	//dibujar_mapa(map2);
-	//flag_PE(flagV);
-	//flag_MX(flagV);
-	//flag_AR(flagH);
-	//flag_BO(flagH);
-	//flag_BR(flagH);
-	//flag_CO(flagH);
-	//flag_NI(flagH);
-	//flag_PA(flagH);
-	/*flag_SU(flagH);*/
-
-	map1Race();
-	for (int i = 0; i < 4; i++) {
-		cout << "el numero" << i << "es " << map1Runners[i];
-	}
+            if (tecla == 'X') cant_pasos++;
+        }
+        setxy(x, y);
+        cout << cant_pasos;
+        milisegundos++;
+        if (milisegundos == 26) {
+            segundos++;
+            milisegundos = 0;
+        }
+        if (segundos == 10) break;X
+        _sleep(10);
+    }
 
 	
 	system("pause>0");
