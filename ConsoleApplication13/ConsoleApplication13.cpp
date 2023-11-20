@@ -51,7 +51,7 @@ int main() {
             segundos++;
             milisegundos = 0;
         }
-        if (segundos == 10) break;X
+        if (segundos == 10) break;
         _sleep(10);
     }
 
