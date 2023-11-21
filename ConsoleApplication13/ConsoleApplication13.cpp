@@ -32,11 +32,9 @@ void gameStart() {
 int main() {
 	Console::SetWindowSize(80, 25);
 	srand(time(NULL));
-    char tecla;
+    /*char tecla;
     int x= 20; int y= 1;
     int cant_pasos = 0;
-    int hist_x[800];
-    int hist_y[800];
     while (1) {
         system("cls");
         if (_kbhit()) {
@@ -54,8 +52,7 @@ int main() {
         if (segundos == 10) break;
         _sleep(10);
     }
-
-	
+    */
 	system("pause>0");
 	return 0;
 }
